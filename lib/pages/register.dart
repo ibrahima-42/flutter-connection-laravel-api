@@ -36,28 +36,29 @@ class _RegisterState extends State<Register> {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = jsonDecode(response.body);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Inscription réussie 🎉")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Inscription réussie 🎉")));
       print(data);
     } else {
-  final error = jsonDecode(response.body);
+      final error = jsonDecode(response.body);
 
-  if (error['message'] != null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(error['message'])),
-    );
-  } else if (error['errors'] != null) {
-    final firstError = error['errors'].values.first[0];
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(firstError)),
-    );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Erreur inconnue')),
-    );
-  }
-}
+      if (error['message'] != null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(error['message'])));
+        Navigator.pushNamed(context, '/login');
+      } else if (error['errors'] != null) {
+        final firstError = error['errors'].values.first[0];
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(firstError)));
+      } else {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Erreur inconnue')));
+      }
+    }
   }
 
   void _togglePasswordView() {
@@ -95,7 +96,9 @@ class _RegisterState extends State<Register> {
                 },
                 controller: _nameController,
                 decoration: const InputDecoration(
-                  labelText: 'name'),
+                  prefixIcon: Icon(Icons.person),
+                  labelText: 'name'
+                  ),
               ),
               espace,
               TextFormField(
@@ -106,7 +109,10 @@ class _RegisterState extends State<Register> {
                   return null;
                 },
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.email),
+                  labelText: 'Email'
+                  ),
               ),
               espace,
               TextFormField(
@@ -119,6 +125,7 @@ class _RegisterState extends State<Register> {
                 controller: _passwordController,
                 obscureText: !_showPassword,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
                   labelText: 'Password',
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -139,10 +146,13 @@ class _RegisterState extends State<Register> {
                 controller: _passwordConfirmationController,
                 obscureText: !_showPasswordConfirmation,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
                   labelText: 'Confirm Password',
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _showPasswordConfirmation ? Icons.visibility_off : Icons.visibility,
+                      _showPasswordConfirmation
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                     ),
                     onPressed: _togglePasswordConfirmationView,
                   ),
@@ -150,8 +160,8 @@ class _RegisterState extends State<Register> {
               ),
               espace,
               ElevatedButton(
-                onPressed: (){
-                  if(_formKey.currentState!.validate()){
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
                     register(context);
                   }
                 },

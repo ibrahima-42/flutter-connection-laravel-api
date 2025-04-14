@@ -19,16 +19,36 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 2,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: Text(user['name']),
+        title: Image.asset('assets/images/logo.png',width: 50,),
         actions: [
+          IconButton(onPressed: (){
+
+          }, icon: Icon(Icons.notifications)),
           IconButton(
             icon: Icon(Icons.logout),
-            onPressed: () {
-              logout(context);
+            onPressed: () async {
+              await logout(context);
             },
           ),
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text('Hello',style: TextStyle(fontSize: 24),),
+                SizedBox(width: 10,),
+                Text('${user['name']}',style: TextStyle(fontSize: 24,color: Colors.blue,fontWeight: FontWeight.bold),)
+              ],
+            ),
+            Text('You are logged in REF')
+          ],
+        ),
       ),
     );
   }
