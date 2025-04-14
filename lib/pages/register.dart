@@ -157,6 +157,12 @@ class _RegisterState extends State<Register> {
                 },
                 child: const Text('Register'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: const Text('Already have an account? Login'),
+              ),
             ],
           ),
         ),

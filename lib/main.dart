@@ -1,3 +1,5 @@
+import 'package:connectfront/pages/home.dart';
+import 'package:connectfront/pages/login.dart';
 import 'package:connectfront/pages/register.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Register(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Register(),
+        '/login': (context) => Login(),
+        '/home': (context) => Home(),
+      },
     );
   }
 }
