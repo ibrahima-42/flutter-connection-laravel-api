@@ -6,6 +6,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     final Map<String, dynamic> args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
     final user = args['user'];
@@ -35,19 +37,21 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text('Hello',style: TextStyle(fontSize: 24),),
-                SizedBox(width: 10,),
-                Text('${user['name']}',style: TextStyle(fontSize: 24,color: Colors.blue,fontWeight: FontWeight.bold),)
-              ],
-            ),
-            Text('You are logged in REF')
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text('Hello',style: TextStyle(fontSize: 24),),
+                  SizedBox(width: 10,),
+                  Text('${user['name']}',style: TextStyle(fontSize: 24,color: Colors.blue,fontWeight: FontWeight.bold),)
+                ],
+              ),
+              Text('You are logged in REF')
+            ],
+          ),
         ),
       ),
     );
