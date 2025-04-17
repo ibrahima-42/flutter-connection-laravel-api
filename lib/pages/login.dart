@@ -88,7 +88,9 @@ class _LoginState extends State<Login> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 60.0),
               const Text(
                 'Login',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -103,7 +105,7 @@ class _LoginState extends State<Login> {
                 },
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: Icon(Icons.email,size: 20,),
                   labelText: 'Email'
                   ),
               ),
@@ -119,23 +121,35 @@ class _LoginState extends State<Login> {
                 obscureText: !_isShowPassword,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: Icon(Icons.lock,size: 20,),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isShowPassword ? Icons.visibility_off : Icons.visibility,
+                      size: 20,
                     ),
                     onPressed: _togglePasswordView,
                   ),
                 ),
               ),
               espace,
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    LoginUser(context);
-                  }
-                },
-                child: const Text('Login'),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      LoginUser(context);
+                    }
+                  },
+                  child: const Text('Login'),
+                ),
               ),
             ],
           ),

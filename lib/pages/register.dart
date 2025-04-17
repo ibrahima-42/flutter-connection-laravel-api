@@ -82,6 +82,7 @@ class _RegisterState extends State<Register> {
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
                 'Register',
@@ -96,7 +97,7 @@ class _RegisterState extends State<Register> {
                 },
                 controller: _nameController,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: Icon(Icons.person,size: 20,),
                   labelText: 'name'
                   ),
               ),
@@ -110,7 +111,7 @@ class _RegisterState extends State<Register> {
                 },
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: Icon(Icons.email,size: 20,),
                   labelText: 'Email'
                   ),
               ),
@@ -125,11 +126,12 @@ class _RegisterState extends State<Register> {
                 controller: _passwordController,
                 obscureText: !_showPassword,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: Icon(Icons.lock,size: 20,),
                   labelText: 'Password',
                   suffixIcon: IconButton(
                     icon: Icon(
                       _showPassword ? Icons.visibility_off : Icons.visibility,
+                      size: 20,
                     ),
                     onPressed: _togglePasswordView,
                   ),
@@ -146,32 +148,56 @@ class _RegisterState extends State<Register> {
                 controller: _passwordConfirmationController,
                 obscureText: !_showPasswordConfirmation,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: Icon(Icons.lock,size: 20,),
                   labelText: 'Confirm Password',
                   suffixIcon: IconButton(
                     icon: Icon(
                       _showPasswordConfirmation
                           ? Icons.visibility_off
                           : Icons.visibility,
+                          size: 20,
                     ),
                     onPressed: _togglePasswordConfirmationView,
                   ),
                 ),
               ),
               espace,
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    register(context);
-                  }
-                },
-                child: const Text('Register'),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      register(context);
+                    }
+                  },
+                  child: const Text('Register'),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
-                child: const Text('Already have an account? Login'),
+              SizedBox(height: 16,),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: const Text('Already have an account? Login'),
+                ),
               ),
             ],
           ),
